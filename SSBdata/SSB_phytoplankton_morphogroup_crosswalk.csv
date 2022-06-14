@@ -1,0 +1,48 @@
+division,genus,species,taxa_id,morpho_func_group
+Bacillariophyta,Navicula,cryptocephala,1214,6
+Bacillariophyta,Cyclotella,sp. 1,1071,6
+Bacillariophyta,Asterionella,formosa,1021,6
+Bacillariophyta,Tabellaria,flocculosa,1332,6
+Chlorophyta,.,.,1000057,8
+Chlorophyta,Chlamydomonas,.,2080,8
+Chlorophyta,.,.,2683,8
+Chlorophyta,Schroederia,judayi,2491,8
+Chlorophyta,Monoraphidium,griffithii,1000031,8
+Chlorophyta,Scourfieldia,cordiformis,8491,8
+Chlorophyta,Dictyosphaerium,ehrenbergianum,2212,8
+Chlorophyta,Actinastrum,hantzschii,2021,8
+Chlorophyta,Chlorogonium,.,2110,8
+Chlorophyta,Mucidosphaerium,pulchellum,2211,8
+Chlorophyta,Oocystis,parva,2363,8
+Chlorophyta,Ulothrix,.,2590,10
+Chlorophyta,Monomastix,minuta,1000538,8
+Chrysophyta,.,.,1652,2
+Chrysophyta,.,.,1652,1
+Chrysophyta,Mallomonas,akrokomas,1183,1
+Chrysophyta,Mallomonas,.,1180,1
+Chrysophyta,.,.,1653,8
+Chrysophyta,Uroglena,.,1631,1
+Cryptophyta,Rhodomonas,minuta,3043,2
+Cryptophyta,Rhodomonas,minuta,3041,2
+Cryptophyta,Cryptomonas,erosa,3015,2
+Cyanophyta,.,.,4282,4
+Cyanophyta,Synechococcus,sp. 1,4323,4
+Cyanophyta,Synechococcus,elongatus,4321,4
+Cyanophyta,Synechocystis,.,4285,4
+Cyanophyta,Aphanothece,nidulans,4062,5
+Cyanophyta,Cyanodictyon,planctonicum,1000080,5
+Cyanophyta,Chroococcus,minutus,4086,5
+Cyanophyta,Aphanocapsa,elachista,4051,5
+Cyanophyta,Aphanocapsa,delicatissima,4054,5
+Cyanophyta,Pseudanabaena,limnetica,4172,5
+Cyanophyta,Pseudanabaena,.,4460,5
+Euglenophyta,Euglena,.,5020,1
+Euglenophyta,Lepocinclis,acus,5023,1
+Euglenophyta,Lepocinclis,.,5050,1
+Haptophyta,Chrysochromulina,parva,1731,2
+Miscellaneous,.,.,7140,2
+Miscellaneous,.,.,7130,8
+Pyrrhophyta,Gymnodinium,sp. 3,6034,1
+Pyrrhophyta,Gymnodinium,sp. 2,6033,1
+Pyrrhophyta,Peridinium,.,6040,1
+Pyrrhophyta,Durinskia,.,1000997,1
