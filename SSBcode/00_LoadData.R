@@ -1,4 +1,6 @@
 ### Data load ####
+library(tidyverse)
+
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Load data for ice, snow, secchi, and chlorophyll
 # Subset to under-ice measurements
