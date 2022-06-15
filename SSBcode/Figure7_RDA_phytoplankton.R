@@ -92,7 +92,7 @@ rda.plot1 = ggplot(df_species, aes(x=RDA1, y=RDA2)) +
                    aes(x = RDA1*scaling_factor, y = RDA2*scaling_factor),
                    label = rownames(df_environ),
                    label.padding = 0.1,
-                   nudge_y = 0.85, color="lightblue4", fill = alpha("white", 0.9),
+                   nudge_y = 0.55, color="lightblue4", fill = alpha("white", 0.9),
                    segment.size = 0.2, size = 2.5) +
   #Set x and y axis titles
   labs(x=paste0("RDA1 (",RDA1_varex," %)"),

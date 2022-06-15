@@ -41,7 +41,7 @@ phyto.cross = read_csv('SSBdata/SSB_phytoplankton_morphogroup_crosswalk.csv') |>
   select(taxa_id, morpho_func_group) |> 
   group_by(taxa_id) |> 
   summarise(morpho_func_group = first(morpho_func_group))
-###### FIGURE OUT ERROR WITH TAXA ID 1652 - GROUP 1 or 2?????? ############
+
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #Removing sample dates during open water
 pp = pp.raw |>

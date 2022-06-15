@@ -96,6 +96,7 @@ cca.plot3 = ggplot(df_species, aes(x=CCA1, y=CCA2)) +
   geom_label_repel(data = df_environ, 
                    aes(x = CCA1*scaling_factor, y = CCA2*scaling_factor),
                    label = rownames(df_environ),
+                   force = 10,
                    label.padding = 0.1,
                    nudge_y = -1, color="lightblue4", fill = alpha("white", 0.9),
                    segment.size = 0.2, size = 2.5) +
@@ -205,6 +206,7 @@ cca.plot4 = ggplot(df_species, aes(x=CCA1, y=CCA2)) +
 
 # combine with phytoplankton plots ####
 source('SSBcode/Figure7_RDA_phytoplankton.R')
+
 (rda.plot1 + rda.plot2) / (cca.plot3 + cca.plot4) + 
   plot_annotation(tag_levels = 'a', tag_suffix = ')') & 
   theme(plot.tag = element_text(size  = 8))
