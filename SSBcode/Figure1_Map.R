@@ -56,7 +56,8 @@ w1 +
   )) + 
   plot_layout(design = layout, widths = c(1,1.25)) +
   plot_annotation(tag_levels = 'a', tag_suffix = ')') & 
-  theme(plot.tag = element_text(size  = 8))
+  theme(plot.tag = element_text(size  = 8), 
+        plot.margin = unit(c(0, 0, 0, 0), "cm"))
 
 ggsave('SSBfigures/Figure1_Map.png', width = 6.5, height = 5, dpi = 500, bg = "transparent")
   
