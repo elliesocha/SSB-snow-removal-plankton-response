@@ -26,7 +26,7 @@ p.pp.rel <- ggplot(pp, aes(x=factor(sampledate), y=relAbd, fill=division)) +
   geom_bar(position = "stack" , stat = "identity", width = 0.5) +
   scale_fill_manual(name= "Division", values = my.colors.2) +
   scale_y_continuous(expand = c(0,0)) +
-  labs(y = "Relative abundance") +
+  labs(y = "Relative total biovolume") +
   gglayers
 
 p.pp.tot <- ggplot(pp, aes(x=factor(sampledate), y=biovolume_conc, fill=division)) +
@@ -52,7 +52,7 @@ p.pg.rel = ggplot(pp, aes(x=factor(sampledate), y=relative_total_biovolume, fill
   geom_bar(position = "stack" , stat = "identity", width = 0.5) +
   scale_fill_manual(name= "Morpho-Functional\nGroupings", values = my.colors.6) +
   scale_y_continuous(expand = c(0,0)) +
-  labs(y = "Relative abundance") +
+  labs(y = "Relative total biovolume") +
   gglayers
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
