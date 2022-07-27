@@ -14,9 +14,11 @@ gglayers = list(
   theme_classic(base_size = 9),
   geom_vline(aes(xintercept = 3.5), linetype = 2),
   geom_vline(aes(xintercept = 6.5), linetype = 2),
+  guides(fill = guide_legend(byrow = TRUE)),
   theme(axis.title.x = element_blank(),
-        axis.text.x=element_text(angle = 45, hjust = 1, vjust = 1),
-        legend.key.height = unit(0.3, 'cm')))
+      axis.text.x=element_text(angle = 45, hjust = 1, vjust = 1),
+      legend.spacing.y = unit(0.1, "cm"),
+      legend.key.height = unit(0.3, 'cm')))
 
 #### Zooplankton by genus ####
 p.zoops.rel <- 

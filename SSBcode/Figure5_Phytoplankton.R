@@ -17,9 +17,18 @@ gglayers = list(
   theme_classic(base_size = 9),
   geom_vline(aes(xintercept = 3.5), linetype = 2),
   geom_vline(aes(xintercept = 7.5), linetype = 2),
+  guides(fill = guide_legend(byrow = TRUE)),
   theme(axis.title.x = element_blank(),
         axis.text.x=element_text(angle = 45, hjust = 1, vjust = 1),
+        legend.spacing.y = unit(0.1, "cm"),
         legend.key.height = unit(0.3, 'cm')))
+    
+ggplot(pp, aes(x=factor(sampledate), y=relative_total_biovolume, fill=grouping)) +
+  geom_bar(position = "stack" , stat = "identity", width = 0.5) +
+  scale_fill_manual(name= "Morpho-Functional\nGroupings", values = my.colors.6) +
+  scale_y_continuous(expand = c(0,0)) +
+  labs(y = "Relative total biovolume") +
+  gglayers
 
 #### Phytoplankton by genus ####
 p.pp.rel <- ggplot(pp, aes(x=factor(sampledate), y=relAbd, fill=division)) +
