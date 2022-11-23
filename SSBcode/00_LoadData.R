@@ -23,10 +23,9 @@ lightSurf = read_csv('SSBdata//SSB_HoboClean.csv') |>
   mutate(sample_date = as.Date(dateTime), hour = hour(dateTime)) |> 
   filter(hour >= 10 & hour <=14) |> 
   group_by(sample_date, Sensor, Depth_m) |> 
-  summarise(Light_lumm2 = mean(Light_lumft2, na.rm = T) *0.092903, Temp_C = mean(Temp_C)) |> 
+  summarise(Light_lumm2 = mean(Light_lumft2, na.rm = T) / 0.092903, Temp_C = mean(Temp_C)) |> 
   filter(Sensor == 1) |> 
   filter(sample_date %in% ice$sample_date)
-
 
 # Join data
 env.vars = ice |> left_join(chlorophyll |> filter(depth == 0)) |> left_join(lightSurf)
