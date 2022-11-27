@@ -1,3 +1,7 @@
+library(tidyverse)
+library(xtable)
+library(broom)
+
 # PAR sensor (LiCor 192SA)
 # micromolesPerMeterSquaredPerSec
 # µmol/m2/sec
@@ -43,5 +47,36 @@ ssb.light = ssb.light |>
   filter(!is.na(Light_lumm2))
 
   
+#### Load ice and snow data ##############
+ssb.join =  read_csv('SSBdata/SSB_licor.csv')  |>  
+  filter(lakeid == 'SSB') |> 
+  rename(sample_date = sampledate) |> 
+  left_join(read_csv('SSBdata/SSB_ice_snow_secchi.csv')) |> 
+  group_by(sample_date) |> 
+  filter(Depth_m == min(Depth_m)) |> 
+  mutate(frlight = light/deck) |> 
+  mutate(totice = totice/100, avsnow = avsnow/100,
+         whiteice = whiteice/100, blackice = blackice/100) |> 
+  filter(sample_date != as.Date('2021-02-17')) 
 
+# Non-Linear Minimization to find k values
+loss.2 <- function(X, df) {
+  k.ice = X[1]
+  # k.blackice = X[1]
+  # k.whiteice = X[2]
+  # k.snow = X[3]
+  
+  # loss = sum((exp(-k.blackice * df$blackice) * 
+  #               exp(-k.whiteice * df$whiteice) - df$frlight) ^ 2, na.rm = T)
+  loss = sum((exp(-k.ice * df$totice) - df$frlight) ^ 2, na.rm = T)
+  return(loss)
+}
 
+# Non-Linear Minimization
+ice.k = nlm(loss.2, c(0), ssb.join)
+
+output.table = ssb.join |> select(sample_date, totice, deck, light, frlight) |> 
+  mutate(k.blackice = ice.k$estimate) |> 
+  left_join(ssb.k)
+
+print(xtable(output.table), include.rownames=FALSE)

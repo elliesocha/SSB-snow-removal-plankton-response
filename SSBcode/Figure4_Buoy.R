@@ -45,10 +45,9 @@ light_all = read_csv('SSBdata//SSB_HoboClean.csv') |>
 
 ltw.day = light_all |> 
   group_by(date, Sensor, group, Depth_m) |> 
-  summarise(Temp_C_mean = mean(Temp_C), Temp_C_max = max(Temp_C), 
-            Temp_C_min = min(Temp_C), 
-            light_max = max(Light_lumm2), 
-            PAR.est_max = max(PAR.est)) |> 
+  summarise(Temp_C_mean = mean(Temp_C), Temp_C_max = max(Temp_C), Temp_C_min = min(Temp_C), 
+            light_max = max(Light_lumm2),  light_mean = mean(Light_lumm2), 
+            PAR.est_max = max(PAR.est), PAR.est_mean = mean(PAR.est)) |> 
   mutate(useDate = if_else(month(date) >= 10, `year<-`(date, 1999), `year<-`(date, 2000)))
 
 # Load oxygen data
@@ -68,22 +67,32 @@ ssb.do.day = ssb.do.raw |>
 ##### Light Intensity Plots ######
 s = 1
 p.light = ggplot(ltw.day) +
+  geom_hline(aes(yintercept = 7.6), linetype = 2, linewidth = 0.2) +
+  geom_hline(aes(yintercept = 20), linetype = 2, linewidth = 0.2) +
   geom_col(data = ltw.day |> filter(group == "2021: Manipulation Yr2", Sensor == s), aes(x = useDate, y = PAR.est_max, fill = '2021: Manipulation Yr2')) +
+  geom_path(data = ltw.day |> filter(group == "2021: Manipulation Yr2", Sensor == s), aes(x = useDate, y = PAR.est_mean, col = '2021: Manipulation Yr2')) +
   geom_col(data = ltw.day |> filter(group == "2020: Manipulation Yr1", Sensor == s), aes(x = useDate, y = PAR.est_max, fill = '2020: Manipulation Yr1')) +
+  geom_path(data = ltw.day |> filter(group == "2020: Manipulation Yr1", Sensor == s), aes(x = useDate, y = PAR.est_mean, col = '2020: Manipulation Yr1')) +
   geom_col(data = ltw.day |> filter(group == "2019: Reference Yr", Sensor == s), aes(x = useDate, y = PAR.est_max, fill = '2019: Reference Yr')) +
   # ylab("Light Intensity"~(lum~m^-2)) +
   ylab("PAR"~(µmol~m^-2~s^-1)) +
   scale_fill_manual(values = c("2019: Reference Yr" = "black",
                                "2020: Manipulation Yr1" = "#f5562a",
                                "2021: Manipulation Yr2" = "#f5d02a"),
-                    name = "") +
+                    name = "Max. Daily PAR") +
+  scale_color_manual(values = c("2019: Reference Yr" = "black",
+                               "2020: Manipulation Yr1" = "#b33c1b",
+                               "2021: Manipulation Yr2" = "#c4a61f"),
+                    name = "Mean Daily PAR") +
   scale_x_date(labels = date_format("%b")) +
   theme_bw(base_size = 9) +
   theme(axis.title.x = element_blank(),
         panel.grid = element_line(size = rel(0.3)),
         legend.key.size = unit(0.3, 'cm'),
         legend.position = c(0.3,0.75),
-        legend.title = element_blank()) 
+        legend.title = element_blank(),
+        ) +
+  guides(color = 'none'); p.light
   
 ##### Dissolved oxygen Plots ######
 p.do = ggplot(ssb.do.day) +
