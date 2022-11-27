@@ -91,7 +91,10 @@ cca.plot3 = ggplot(df_species, aes(x=CCA1, y=CCA2)) +
                arrow = arrow(length=unit(0.02,"npc"))) + #Set the size of the lines that form the tip of the arrow
   #Add species text
   geom_point(data = df_species, aes(x=CCA1, y = CCA2, col = label), size = 3) +
-  scale_color_manual(values = my.colors, name = 'Genus') + 
+  scale_color_manual(values = my.colors, name = 'Genus',
+                     labels = c("*Ascomorpha*","*Asplanchna*","*Bosmina*","*Branchionus*",
+                               "*Keratella*",
+                                "*Synchaeta*","Unknown rotifer")) + 
   #Add environmental vars text
   geom_label_repel(data = df_environ, 
                    aes(x = CCA1*scaling_factor, y = CCA2*scaling_factor),
@@ -111,7 +114,8 @@ cca.plot3 = ggplot(df_species, aes(x=CCA1, y=CCA2)) +
         plot.margin = unit(c(0,0,0,0), "cm"),
         legend.margin = margin(c(0,0,0,0), unit = "cm"),
         legend.key.width = unit(0.1,"cm"),
-        legend.key.height = unit(0.15,"cm")); cca.plot3
+        legend.key.height = unit(0.15,"cm")) +
+  theme(legend.text = element_markdown()); cca.plot3
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #### Group by morpho group ####
