@@ -46,18 +46,38 @@ AB
 CC
 "
 
-w1 + 
-  wrap_elements(grobTree(
-    rasterGrob(img1, interpolate=TRUE), 
-    textGrob('South Sparkling Bog', x = 0.3, y = 0.28, gp=gpar(fontsize=9, col="white"))
-  )) +
-  wrap_elements(grobTree(
-    rasterGrob(img2, just = 'center', interpolate=TRUE)
-  )) + 
-  plot_layout(design = layout, widths = c(1,1.25)) +
-  plot_annotation(tag_levels = 'a', tag_suffix = ')') & 
-  theme(plot.tag = element_text(size  = 8), 
-        plot.margin = unit(c(0, 0, 0, 0), "cm"))
+w2 = ggplot(data.frame(x = 0:1, y = 0:1), aes(x,y)) +
+  geom_blank() +
+  annotation_custom(grid::rasterGrob(img1)) +
+  annotate('text', label = 'South Sparkling Bog', x = 0.2, y = 0.16, color = 'white', size = 3) +
+  annotate("segment", x = 0.14, y = 0.23, xend = 0.23, yend = 0.27,
+           arrow = arrow(angle = 30, length = unit(.2,"cm")), color = 'white', size = 1) +
+  theme_void()
+
+w3 = ggplot() + annotation_custom(grid::rasterGrob(img2)) +
+  theme_void()
+
+# Patchwork 
+w1 + w2 + w3 + 
+plot_layout(design = layout, widths = c(1,1.25)) +
+plot_annotation(tag_levels = 'a', tag_suffix = ')') & 
+theme(plot.tag = element_text(size  = 8), 
+      plot.margin = unit(c(0, 0, 0, 0), "cm")) 
 
 ggsave('SSBfigures/Figure1_Map.png', width = 6.5, height = 5, dpi = 500, bg = "transparent")
+  
+
+# w1 + 
+#   wrap_elements(grobTree(
+#     rasterGrob(img1, interpolate=TRUE), 
+#     textGrob('South Sparkling Bog', x = 0.3, y = 0.28, gp=gpar(fontsize=9, col="white")),
+#   )) +
+#   wrap_elements(grobTree(
+#     rasterGrob(img2, just = 'center', interpolate=TRUE)
+#   )) + 
+#   plot_layout(design = layout, widths = c(1,1.25)) +
+#   plot_annotation(tag_levels = 'a', tag_suffix = ')') & 
+#   theme(plot.tag = element_text(size  = 8), 
+#         plot.margin = unit(c(0, 0, 0, 0), "cm"))
+
   
