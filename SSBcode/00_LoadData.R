@@ -1,5 +1,10 @@
 ### Data load ####
 library(tidyverse)
+library(zoo)
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Load HOBO and PAR data
+source('SSBcode/SSB_light.R')
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Load data for ice, snow, secchi, and chlorophyll
@@ -19,16 +24,24 @@ icesnow <- ice %>%
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Buoy
-lightSurf = read_csv('SSBdata//SSB_HoboClean.csv') |> 
-  mutate(sample_date = as.Date(dateTime), hour = hour(dateTime)) |> 
+lightSurf = hobo.light.PAR
   filter(hour >= 10 & hour <=14) |> 
   group_by(sample_date, Sensor, Depth_m) |> 
   summarise(Light_lumm2 = mean(Light_lumft2, na.rm = T) / 0.092903, Temp_C = mean(Temp_C)) |> 
   filter(Sensor == 1) |> 
   filter(sample_date %in% ice$sample_date)
 
+lightDay = hobo.light.PAR |> 
+  group_by(sample_date, Sensor, Depth_m) |> 
+  summarise(Light_lumm2 = mean(Light_lumm2, na.rm = T), PAR.est = mean(PAR.est, na.rm = T), Temp_C = mean(Temp_C)) |> 
+  ungroup() |> 
+  group_by(Sensor, Depth_m) |> 
+  mutate(PAR.est.1week = round(rollapply(PAR.est, 7, mean, align='right', fill=NA), 3)) |> 
+  filter(Sensor == 1) |> 
+  filter(sample_date %in% ice$sample_date)
+
 # Join data
-env.vars = ice |> left_join(chlorophyll |> filter(depth == 0)) |> left_join(lightSurf)
+env.vars = ice |> left_join(chlorophyll |> filter(depth == 0)) |> left_join(lightSurf) 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Phytoplankton data 

@@ -2,6 +2,9 @@ library(tidyverse)
 library(lubridate)
 library(patchwork)
 library(ggpattern)
+library(ggforce)
+library(scales)
+
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 source('SSBcode/00_LoadData.R')
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -29,6 +32,29 @@ p.ice = ggplot() +
         axis.title.x = element_blank(),
         plot.margin = unit(c(0,0,0,0), "cm"),
         legend.margin = margin(c(0,0,0,0), unit = "cm")); p.ice
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#### Light ####
+p.PAR = ggplot() +
+  # geom_col(data = ice, aes(x = factor(sample_date), 
+  #                          y = secchi), width=0.3, fill = '#542d1d') + 
+  geom_col_pattern(data = lightDay, aes(x = factor(sample_date), y = PAR.est.1week), 
+                   width=0.3, color = 'black', size = 0.2,
+                   fill = '#f0ee8b', pattern_colour = 'black', pattern = 'stripe', pattern_fill = 'grey80',
+                   pattern_size = 0.1, pattern_spacing = 0.1) +
+  theme_bw(base_size = 9) +
+  theme(axis.text.x=element_text(angle = 45, vjust = 1, hjust = 1)) +
+  # scale_y_reverse(labels = abs, expand = c(0,0), limits = c(105,0)) +
+  # scale_y_log10() +
+  scale_y_continuous(trans = trans_reverser(pseudo_log_trans(base = 10)), breaks = c(0,2,4,6,8,10)) +
+  ylab("PAR"~(µmol~m^-2~s^-1)) +
+  geom_vline(aes(xintercept = 3.5), linetype = 2) +
+  geom_vline(aes(xintercept = 7.5), linetype = 2) +
+  theme(axis.text.x = element_blank(),
+        panel.grid = element_line(size = rel(0.3)),
+        axis.title.x = element_blank(),
+        plot.margin = unit(c(0,0,0,0), "cm"),
+        legend.margin = margin(c(0,0,0,0), unit = "cm")); p.PAR
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #### Secchi ####
@@ -86,11 +112,11 @@ p.chl = ggplot(chla.mean) +
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Combo plot
-p.ice / p.secchi / p.chl + 
-  plot_layout(heights = c(2,1,2)) +
+p.ice / p.PAR/ p.secchi / p.chl + 
+  plot_layout(heights = c(1.8,1.5,1,1.8)) +
   plot_annotation(tag_levels = 'a', tag_suffix = ')') & 
   theme(plot.tag = element_text(size  = 8))
 
 ggsave(filename ="SSBfigures/Figure2_Ice.png", plot = last_plot(), 
-       height = 5.5, width = 6.5, units = "in", dpi = 500)
+       height = 6.6, width = 6.5, units = "in", dpi = 500)
 

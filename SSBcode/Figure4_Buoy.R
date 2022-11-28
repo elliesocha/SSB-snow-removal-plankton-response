@@ -9,12 +9,11 @@ library(scales)
 # Ice off/on 2019-11-06 2020-04-24
 # Ice off/on 2020-11-16 2021-04-05
 
-source('SSBcode/SSB_light.R')
 ##### HOBO vs Licor plot ######
-ssb.light.filter = ssb.light |> 
+ssb.light.filter = ssb.par.hobo |> 
   filter(Depth_m < 2) |> 
   filter(sample_date != as.Date('2021-02-17'))
-         
+
 p.light.compare = ggplot(ssb.light.filter) + 
   geom_smooth(aes(x = Light_lumm2, y = light), method = 'lm', color = 'lightblue4', size = 0.5, alpha = 0.3) +
   geom_point(aes(x = Light_lumm2, y = light, group = Depth_m), shape = 21, stroke = 0.2, fill = 'lightblue4') +
@@ -25,13 +24,6 @@ p.light.compare = ggplot(ssb.light.filter) +
   theme_bw(base_size = 9) +
   theme(panel.grid = element_line(size = rel(0.3)))
 
-modelFit = lm(log10(light) ~ log10(Light_lumm2), data = ssb.light.filter)
-
-test = ssb.light.filter %>% 
-  mutate(PAR.est = summary(modelFit)$coefficients[2,1] * log10(Light_lumm2) + summary(modelFit)$coefficients[1,1]) |> 
-  mutate(PAR.est = 10^PAR.est)
-test
-
 # Load temperature/light data
 light_all = read_csv('SSBdata//SSB_HoboClean.csv') |> 
   mutate(Light_lumm2 = Light_lumft2 / 0.092903) |> 
@@ -40,7 +32,7 @@ light_all = read_csv('SSBdata//SSB_HoboClean.csv') |>
                           dateTime >= as.Date('2020-11-16') & dateTime <= as.Date('2021-04-05') ~ '2021: Manipulation Yr2')) |> 
   filter(!is.na(group)) |> 
   mutate(date = as.Date(dateTime)) |> 
-  mutate(PAR.est = summary(modelFit)$coefficients[2,1] * log10(Light_lumm2) + summary(modelFit)$coefficients[1,1]) |> 
+  mutate(PAR.est = summary(modelPARFit)$coefficients[2,1] * log10(Light_lumm2) + summary(modelPARFit)$coefficients[1,1]) |> 
   mutate(PAR.est = 10^PAR.est)
 
 ltw.day = light_all |> 

@@ -37,13 +37,6 @@ p.zoops.rel <-
   gglayers +
   theme(legend.text = element_markdown())
 
-scale_color_hue(
-  breaks = c("ppi1", "sp1-1", "sp1-1 ppi1", "sp1-2 ppi1",
-             "sp1-3 ppi1", "sp1-4 ppi1", "sp1-5 ppi1", "Wt"),
-  labels = c("ppi1", "*sp1-1*", "*sp1-1 ppi1*", "*sp1-2 ppi1*",
-             "*sp1-3 ppi1*", "*sp1-4 ppi1*", "*sp1-5 ppi1*", "*Wt*")
-) 
-
 p.zoops.tot <- 
   ggplot(zoops, aes(x=factor(sample_date), y=density, fill=genus)) +
   geom_bar(position = "stack" , stat = "identity", width = 0.5) +
