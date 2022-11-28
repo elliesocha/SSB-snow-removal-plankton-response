@@ -38,7 +38,7 @@ p.ice = ggplot() +
 p.PAR = ggplot() +
   # geom_col(data = ice, aes(x = factor(sample_date), 
   #                          y = secchi), width=0.3, fill = '#542d1d') + 
-  geom_col_pattern(data = lightDay, aes(x = factor(sample_date), y = PAR.est.1week), 
+  geom_col_pattern(data = lightDay, aes(x = factor(sample_date), y = PAR.est), 
                    width=0.3, color = 'black', size = 0.2,
                    fill = '#f0ee8b', pattern_colour = 'black', pattern = 'stripe', pattern_fill = 'grey80',
                    pattern_size = 0.1, pattern_spacing = 0.1) +

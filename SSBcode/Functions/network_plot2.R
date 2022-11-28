@@ -58,6 +58,10 @@ network_plot2.cor_df <- function(rdf,
   colnames(points) <- c("x", "y")
   points$id <- rownames(points)
   
+  # ### HD: random points
+  # points$x = sample(seq(-1,1,by = 0.1), size = 7)
+  # points$y = sample(seq(-1,1,by = 0.1), size = 7)
+  
   # Create a proximity matrix of the paths to be plotted.
   proximity <- abs(rdf)
   proximity[upper.tri(proximity)] <- NA
@@ -137,12 +141,12 @@ network_plot2.cor_df <- function(rdf,
     # expand the axes to add space for curves
     expand_limits(
       x = c(
-        min(points$x) - .1,
-        max(points$x) + .1
+        min(points$x) - .2,
+        max(points$x) + .2
       ),
       y = c(
-        min(points$y) - .1,
-        max(points$y) + .1
+        min(points$y) - .2,
+        max(points$y) + .2
       )
     ),
     # Theme and legends

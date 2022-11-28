@@ -35,13 +35,13 @@ lightDay = hobo.light.PAR |>
   group_by(sample_date, Sensor, Depth_m) |> 
   summarise(Light_lumm2 = mean(Light_lumm2, na.rm = T), PAR.est = mean(PAR.est, na.rm = T), Temp_C = mean(Temp_C)) |> 
   ungroup() |> 
-  group_by(Sensor, Depth_m) |> 
-  mutate(PAR.est.1week = round(rollapply(PAR.est, 7, mean, align='right', fill=NA), 3)) |> 
+  # group_by(Sensor, Depth_m) |> 
+  # mutate(PAR.est.1week = round(rollapply(PAR.est, 7, mean, align='right', fill=NA), 3)) |> 
   filter(Sensor == 1) |> 
   filter(sample_date %in% ice$sample_date)
 
 # Join data
-env.vars = ice |> left_join(chlorophyll |> filter(depth == 0)) |> left_join(lightSurf) 
+env.vars = ice |> left_join(chlorophyll |> filter(depth == 0)) |> left_join(lightDay)
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Phytoplankton data 
