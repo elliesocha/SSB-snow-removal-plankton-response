@@ -19,11 +19,13 @@ pp.biovolume = pp |> filter(division %in% c('Chlorophyta','Cyanophyta')) |>
   pivot_wider(names_from = division, values_from = total) |> 
   left_join(total.pp)
 
-useVars = env.vars |> left_join(pp.biovolume) |> 
+useVars = env.vars |> 
+  left_join(pp.biovolume) |> 
   filter(sample_date %in% unique(zoops$sample_date)) |> 
-  select(-Lake, -lakeid, -Sensor, -depth, -Depth_m, -Temp_C, -sample_date) |> 
+  mutate(PAR.est = log10(PAR.est + 0.001)) |> 
+  select(avsnow, totice, whiteice, blackice, secchi, chlorophyll_ug_L, PAR.est, Chlorophyta:PP.Biovolume) |> 
   setNames(c('Snow','Total Ice','White Ice',
-             'Black Ice','Secchi','Chl-a 0 m','Light 0.7 m','Chlorophyta','Cyanophyta','PP.Biovolume'))
+             'Black Ice','Secchi','Chl-a 0 m','PAR 0.7 m', 'Chlorophyta','Cyanophyta','PP.Biovolume')) 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #### Group phytoplankton division ####
@@ -33,7 +35,9 @@ df.genus = zoops |> arrange(sample_date) |>
   group_by(genus) |> 
   mutate(n = n()) |> 
   filter(n >= 3)
+
 table(df.genus$genus)
+table(df.genus$sample_date)
 
 # total = zoops |> arrange(sample_date) |> 
 #   group_by(lakeid, sample_date) |> 

@@ -9,10 +9,12 @@ set.seed(12)
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 source('SSBcode/00_LoadData.R')
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 useVars = env.vars |> 
-  select(-Lake, -lakeid, -Sensor, -depth, -Depth_m, -Temp_C, -sample_date) |> 
+  mutate(PAR.est = log10(PAR.est + 0.001)) |> 
+  select(avsnow, totice, whiteice, blackice, secchi, chlorophyll_ug_L, PAR.est) |> 
   setNames(c('Snow','Total Ice','White Ice',
-             'Black Ice','Secchi','Chl-a 0 m','Light 0.7 m'))
+             'Black Ice','Secchi','Chl-a 0 m','PAR 0.7 m'))
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #### Group phytoplankton division ####
@@ -37,7 +39,7 @@ df.division.wide = df.division |>
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 rda_phyto <- rda(df.division.wide ~ 
-                   `Light 0.7 m` + `Black Ice`  + `White Ice` + Secchi ,
+                   `PAR 0.7 m` + `Black Ice`  + `White Ice` + Secchi ,
                  data = useVars, na.action = 'na.exclude') 
 
 # Testing the significance of the rda model:
@@ -123,7 +125,7 @@ df.group.wide = df.group |>
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 rda_phyto.group <- rda(df.group.wide ~ 
-                         `Light 0.7 m` +`Black Ice`  + `White Ice` + Secchi,
+                         `PAR 0.7 m` +`Black Ice`  + `White Ice` + Secchi,
                        data = useVars, na.action = 'na.exclude') 
 
 # Testing the significance of the rda model:

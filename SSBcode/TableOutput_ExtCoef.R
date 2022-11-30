@@ -2,7 +2,7 @@
 # South Sparkling Bog in 2021. A single ice KD was calculated for all dates
 
 #### Load ice and snow data ##############
-ssb.join =  ssb.light |> 
+ssb.join =  ssb.PAR |> 
   left_join(read_csv('SSBdata/SSB_ice_snow_secchi.csv')) |> 
   group_by(sample_date) |> 
   filter(Depth_m == min(Depth_m)) |> 
