@@ -10,7 +10,7 @@ source('SSBcode/Functions//network_plot2.R')
 source('SSBcode/00_LoadData.R')
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-# Join data
+# Select data
 useVars = env.vars |> 
   mutate(PAR.est = log10(PAR.est + 0.001)) |> 
   select(avsnow, totice, whiteice, blackice, secchi, chlorophyll_ug_L, PAR.est) |> 
