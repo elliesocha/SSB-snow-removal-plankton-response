@@ -11,11 +11,11 @@ source('SSBcode/00_LoadData.R')
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 total.pp = pp |> arrange(sampledate) |> 
   group_by(sample_date = sampledate) |> 
-  summarise(PP.Biovolume = log(sum(biovolume_conc, na.rm = T))) 
+  summarise(PP.Biovolume = log10(sum(biovolume_conc, na.rm = T))) 
 
 pp.biovolume = pp |> filter(division %in% c('Chlorophyta','Cyanophyta')) |> 
   group_by(sample_date = sampledate, division) |> 
-  summarise(total = log(sum(biovolume_conc))) |> 
+  summarise(total = log10(sum(biovolume_conc))) |> 
   pivot_wider(names_from = division, values_from = total) |> 
   left_join(total.pp)
 
@@ -50,8 +50,12 @@ df.genus.wide = df.genus |> select(-n) |>
   ungroup() |> 
   select(-lakeid, - sample_date)
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# cca_zoop <- cca(df.genus.wide ~ 
+#                  PP.Biovolume + Chlorophyta + Cyanophyta + `White Ice` + `Black Ice`,
+#                 data = useVars, na.action = 'na.exclude') 
+
 cca_zoop <- cca(df.genus.wide ~ 
-                 PP.Biovolume + Chlorophyta + Cyanophyta + `White Ice` + `Black Ice`,
+                  PP.Biovolume + Chlorophyta + Cyanophyta + `PAR 0.7 m`,
                 data = useVars, na.action = 'na.exclude') 
 
 # Testing the significance of the CCA model:
@@ -135,7 +139,7 @@ df.group.wide = df.group |>
   select(-lakeid, - sample_date)
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 cca_zoop.group <- cca(df.group.wide ~ 
-                        PP.Biovolume + Chlorophyta + Cyanophyta + `White Ice` + `Black Ice`,
+                        PP.Biovolume + Chlorophyta + Cyanophyta + `PAR 0.7 m`,
                       data = useVars, na.action = 'na.exclude') 
 
 # Testing the significance of the CCA model:

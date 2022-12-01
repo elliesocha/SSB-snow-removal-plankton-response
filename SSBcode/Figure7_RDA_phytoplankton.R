@@ -27,7 +27,7 @@ total = pp |> arrange(sampledate) |>
   summarise(total = sum(biovolume_conc, na.rm = T)) 
 
 df.division.wide = df.division |> 
-  mutate(total = log(total)) |> 
+  mutate(total = log10(total)) |> 
   pivot_wider(names_from = division,
               values_from = total,
               values_fill = 0) |>
@@ -35,7 +35,7 @@ df.division.wide = df.division |>
   select(-lakeid, - sampledate) |> 
   select(-Miscellaneous, -Haptophyta, -Pyrrhophyta, -Euglenophyta, -Cryptophyta) |> 
   # select(Chlorophyta, Cyanophyta)
-  bind_cols(PP.Biovolume = log(total$total))
+  bind_cols(PP.Biovolume = log10(total$total))
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 rda_phyto <- rda(df.division.wide ~ 
@@ -116,7 +116,7 @@ df.group = pp |> arrange(sampledate) |>
   summarise(total = sum(cells_per_ml, na.rm = T))
 
 df.group.wide = df.group |> 
-  mutate(total = log(total)) |> 
+  mutate(total = log10(total)) |> 
   pivot_wider(names_from = grouping,
               values_from = total,
               values_fill = 0) |>
@@ -190,9 +190,9 @@ rda.plot2 = ggplot(df_species, aes(x=RDA1, y=RDA2)) +
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # combine plots ####
-# rda.plot1 + rda.plot2 + plot_layout(widths = c(0.5,0.5)) +
-#   plot_annotation(tag_levels = 'a', tag_suffix = ')') & 
-#   theme(plot.tag = element_text(size  = 8))
+rda.plot1 + rda.plot2 + plot_layout(widths = c(0.5,0.5)) +
+  plot_annotation(tag_levels = 'a', tag_suffix = ')') &
+  theme(plot.tag = element_text(size  = 8))
 
 # ggsave('SSBfigures/Figure7_rda_phytoplankton.png', width = 6.5, height = 2.5, dpi = 500)  
 #####

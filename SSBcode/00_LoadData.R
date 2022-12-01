@@ -24,12 +24,12 @@ icesnow <- ice %>%
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Buoy
-lightSurf = hobo.light.PAR
-  filter(hour >= 10 & hour <=14) |> 
-  group_by(sample_date, Sensor, Depth_m) |> 
-  summarise(Light_lumm2 = mean(Light_lumft2, na.rm = T) / 0.092903, Temp_C = mean(Temp_C)) |> 
-  filter(Sensor == 1) |> 
-  filter(sample_date %in% ice$sample_date)
+# lightSurf = hobo.light.PAR
+#   filter(hour >= 10 & hour <=14) |> 
+#   group_by(sample_date, Sensor, Depth_m) |> 
+#   summarise(Light_lumm2 = mean(Light_lumft2, na.rm = T) / 0.092903, Temp_C = mean(Temp_C)) |> 
+#   filter(Sensor == 1) |> 
+#   filter(sample_date %in% ice$sample_date)
 
 lightDay = hobo.light.PAR |> 
   group_by(sample_date, Sensor, Depth_m) |> 
