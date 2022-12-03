@@ -11,7 +11,11 @@ source('SSBcode/SSB_light.R')
 # Subset to under-ice measurements
 ice = read_csv('SSBdata/SSB_ice_snow_secchi.csv') |> 
   filter(month(sample_date) < 4 | month(sample_date) >= 12)
-chlorophyll = read_csv('SSBdata/SSB_chlorophyll.csv')
+
+chlorophyll = read_csv('SSBdata/SSB_chlorophyll.csv') 
+# |> left_join(ice |> select(sample_date,totice)) |> 
+#   mutate(depth.adj = if_else(depth != 0, depth, depth + totice/100)) |> 
+#   select(-totice)
 
 # Rearrange for plotting
 icesnow <- ice %>%
