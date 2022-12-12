@@ -29,45 +29,48 @@ p.zoops.rel <-
   ggplot(zoops, aes(x=factor(sample_date), y=relAbd, fill=genus)) +
   geom_bar(position = "stack" , stat = "identity", width = 0.5) +
   scale_fill_manual(name= "Genus", values = my.colors, 
-                    labels = c("*Ascomorpha*","*Asplanchna*","*Bosmina*","*Branchionus*",
-                    "*Chaoborus*","*Daphnia*","*Kellicottia*","*Keratella*","*Polyarthra*",
-                    "*Synchaeta*","*Trichocerca*","Unknown Bdelloid","Unknown rotifer")) +
+                    labels = c("*Ascomorpha**","*Asplanchna**","*Bosmina*","*Branchionus**",
+                    "*Chaoborus*","*Daphnia*","*Kellicottia**","*Keratella**","*Polyarthra**",
+                    "*Synchaeta**","*Trichocerca**","Unknown Bdelloid*","Unknown rotifer*")) +
   scale_y_continuous(expand = c(0,0)) +
   labs(y = "Relative abundance") +
   gglayers +
   theme(legend.text = element_markdown())
+p.zoops.rel
 
 p.zoops.tot <- 
   ggplot(zoops, aes(x=factor(sample_date), y=density, fill=genus)) +
   geom_bar(position = "stack" , stat = "identity", width = 0.5) +
   scale_fill_manual(name= "Genus", values = my.colors,
-                    labels = c("*Ascomorpha*","*Asplanchna*","*Bosmina*","*Branchionus*",
-                               "*Chaoborus*","*Daphnia*","*Kellicottia*","*Keratella*","*Polyarthra*",
-                               "*Synchaeta*","*Trichocerca*","Unknown Bdelloid","Unknown rotifer")) +
+                    labels = c("*Ascomorpha**","*Asplanchna**","*Bosmina*","*Branchionus**",
+                               "*Chaoborus*","*Daphnia*","*Kellicottia**","*Keratella**","*Polyarthra**",
+                               "*Synchaeta**","*Trichocerca**","Unknown Bdelloid*","Unknown rotifer*")) +
   scale_y_continuous(limits = c(0, 72), expand = c(0,0)) +
   ylab(expression(paste("Density ", "(",'Individuals ', L^-1,")"))) +
   gglayers +
   theme(legend.text = element_markdown())
+p.zoops.tot
 
 #### Zooplankton groupings ####
-my.colors.2 <- c("#94C971", "#226231",
-                 "#FFA17F",
-                 "#B5D6E2", "#1D3E68",
-                 "#FFA17F", "#BF4904")
+my.colors.2 <- c("#A23B27", "#FFEF7D",
+                 "#C2C9EF",
+                 "#F69431", "#DF4E97")
 
 p.zg.tot = ggplot(zoops, aes(x=factor(sample_date), y=density, fill=trophi_grouping)) +
   geom_bar(position = "stack" , stat = "identity", width = 0.5) +
-  scale_fill_manual(name= "Trophi Groupings", values = my.colors.2) +
+  scale_fill_manual(name= "Trophi Groupings", values = my.colors.2, labels = c("inducate trophi (raptorial)", "malleate trophi (microphagous)", "N/A", "virgate trophi 1 (raptorial)", "virgate trophi 2 (raptorial)")) +
   scale_y_continuous(limits = c(0, 72), expand = c(0,0)) +
   ylab(expression(paste("Density ", "(",'Individuals ', L^-1,")"))) +
   gglayers
+p.zg.tot
 
 p.zg.rel = ggplot(zoops, aes(x=factor(sample_date), y=relAbd, fill=trophi_grouping)) +
   geom_bar(position = "stack" , stat = "identity", width = 0.5) +
-  scale_fill_manual(name= "Trophi Groupings", values = my.colors.2) +
+  scale_fill_manual(name= "Trophi Groupings", values = my.colors.2, labels = c("inducate trophi (raptorial)", "malleate trophi (microphagous)", "N/A", "virgate trophi 1 (raptorial)", "virgate trophi 2 (raptorial)")) +
   scale_y_continuous(expand = c(0,0)) +
   labs(y = "Relative abundance") +
   gglayers
+p.zg.rel
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ### Combo Plot ###
