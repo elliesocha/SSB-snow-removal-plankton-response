@@ -46,9 +46,9 @@ p.pp.tot <- ggplot(pp, aes(x=factor(sampledate), y=biovolume_conc, fill=division
   gglayers
 
 #### Phytoplankton groupings ####
-my.colors.6 <- c("#FFA17F", "#BF4904",
-                 "#B5D6E2", "#1D3E68",
-                 "#94C971")
+my.colors.6 <- c("#ECD698", "#4E4019",
+                 "#26B7AE", "#0D5C57",
+                 "#7FDF8F")
 
 p.pg.tot = ggplot(pp, aes(x=factor(sampledate), y=biovolume_conc, fill=grouping)) +
   geom_bar(position = "stack" , stat = "identity", width = 0.5) +
@@ -56,6 +56,7 @@ p.pg.tot = ggplot(pp, aes(x=factor(sampledate), y=biovolume_conc, fill=grouping)
   scale_y_continuous(limits = c(0, 11.5e6), expand = c(0,0)) +
   ylab(expression(paste("Biovolume ", "(",µm^3," ",mL^-1,")"))) +
   gglayers
+p.pg.tot
 
 p.pg.rel = ggplot(pp, aes(x=factor(sampledate), y=relative_total_biovolume, fill=grouping)) +
   geom_bar(position = "stack" , stat = "identity", width = 0.5) +
@@ -63,6 +64,7 @@ p.pg.rel = ggplot(pp, aes(x=factor(sampledate), y=relative_total_biovolume, fill
   scale_y_continuous(expand = c(0,0)) +
   labs(y = "Relative total biovolume") +
   gglayers
+p.pg.rel
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ### Combo Plot ###
