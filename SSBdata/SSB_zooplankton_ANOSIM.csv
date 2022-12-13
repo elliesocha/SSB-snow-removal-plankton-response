@@ -1,0 +1,88 @@
+lakeid,year,sample_date,genus,species_name,density,individuals_measured,avg_length
+SSB,2019,1/18/2019,Synchaeta,Synchaeta sp.,0.036380173,8,0.13
+SSB,2019,1/18/2019,Keratella,Keratella tecta,0.013642565,3,0.131666667
+SSB,2019,1/18/2019,Asplanchna,Asplanchna sp.,0.059117781,13,0.156923077
+SSB,2019,1/18/2019,Unknown rotifer,Unknown rotifer,0.004547522,1,0.119
+SSB,2019,1/18/2019,Keratella,Keratella sp.,0.013642565,3,0.124666667
+SSB,2019,2/16/2019,Unknown Bdelloid,Unknown Bdelloid,0.036380173,8,0.231
+SSB,2019,2/16/2019,Bosmina,Bosmina longirostris,0.018190086,4,0.39425
+SSB,2019,2/16/2019,Asplanchna,Asplanchna sp.,0.004547522,1,0.148
+SSB,2019,3/9/2019,Keratella,Keratella cochlearis,0.009095043,2,0.146
+SSB,2019,3/9/2019,Synchaeta,Synchaeta sp.,0.018190086,4,0.173
+SSB,2019,3/9/2019,Unknown rotifer,Unknown rotifer,0.004547522,1,0.116
+SSB,2019,3/9/2019,Asplanchna,Asplanchna priodonta,0.022737608,5,0.1296
+SSB,2019,3/9/2019,Chaoborus,Chaoborus americanus,0.004547522,1,9.003
+SSB,2020,1/7/2020,Branchionus,Branchionus calyciflores,0.151584053,4,0.164
+SSB,2020,1/7/2020,Unknown rotifer 1,Unknown rotifer,0.037896013,1,0.149
+SSB,2020,1/7/2020,Asplanchna,Asplanchna sp.,0.075792027,2,0.15
+SSB,2020,1/7/2020,Bosmina,Bosmina longirostris,0.037896013,1,0.415
+SSB,2020,1/31/2020,Asplanchna,Asplanchna priodonta,0.009095043,2,0.106133333
+SSB,2020,1/31/2020,Polyarthra,Polyarthra sp.,0.004547522,1,0.125
+SSB,2020,1/31/2020,Unknown rotifer 2,Unknown rotifer,0.013642565,3,0.109666667
+SSB,2020,1/31/2020,Unknown rotifer 3,Unknown rotifer,0.004547522,1,0.155
+SSB,2020,3/6/2020,Keratella,Keratella sp.,0.004547522,1,0.171
+SSB,2020,3/6/2020,Asplanchna,Asplanchna sp.,0.145520691,32,0.1521
+SSB,2020,3/6/2020,Unknown rotifer 3,Unknown rotifer,0.004547522,1,0.154
+SSB,2020,3/6/2020,Trichocerca,Trichocerca sp.,0.677580719,149,0.171033333
+SSB,2020,3/6/2020,Ascomorpha,Ascomorpha ecaudis,0.013642565,3,0.136
+SSB,2020,5/5/2020,Nauplii,Nauplii,18.64483856,246,0.235233333
+SSB,2020,5/5/2020,Keratella,Keratella earlinae,0.45475216,6,0.146333333
+SSB,2020,5/5/2020,Unknown copepod,Unknown Copepod,3.562225254,47,0.5517
+SSB,2020,5/5/2020,Asplanchna,Asplanchna priodonta,2.95588904,39,0.1535
+SSB,2020,5/5/2020,Unknown rotifer 4,Unknown rotifer,0.303168107,4,0.13675
+SSB,2020,5/5/2020,Unknown Bdelloid,Unknown Bdelloid,0.68212824,9,0.109111111
+SSB,2020,5/5/2020,Chaoborus,Chaoborus americanus,0.378960133,5,8.6038
+SSB,2020,5/5/2020,Bosmina,Bosmina longirostris,0.22737608,3,0.309333333
+SSB,2020,10/30/2020,Unknown rotifer 5,Unknown rotifer,0.495679854,109,0.1831
+SSB,2020,10/30/2020,Asplanchna,Asplanchna priodonta,0.504774898,111,0.130633333
+SSB,2020,10/30/2020,Keratella,Keratella cochlearis,0.050022738,11,0.14
+SSB,2020,10/30/2020,Keratella,Keratella taurocephala,0.395634379,87,0.1384
+SSB,2020,10/30/2020,Unknown Bdelloid,Unknown Bdelloid,0.800363802,176,0.108
+SSB,2020,10/30/2020,Unknown rotifer 6,Unknown rotifer,0.063665302,14,0.093928571
+SSB,2020,10/30/2020,Keratella,Keratella hiemalis,0.02728513,6,0.178166667
+SSB,2020,10/30/2020,Lecane,Lecane sp.,0.013642565,3,0.125
+SSB,2020,10/30/2020,Unknown rotifer 7,Unknown rotifer,0.004547522,1,0.229
+SSB,2020,10/30/2020,Diacyclops,Diacyclops sp.,0.018190086,4,1.13925
+SSB,2020,10/30/2020,Bosmina,Bosmina longirostris,0.009095043,2,0.33
+SSB,2020,10/30/2020,Daphnia,Daphnia sp.,0.004547522,1,0.317
+SSB,2021,1/13/2021,Asplanchna,Asplanchna priodonta,23.19236016,306,0.160866667
+SSB,2021,1/13/2021,Daphnia,Daphnia mendotae,0.075792027,1,0.963
+SSB,2021,1/13/2021,Ascomorpha,Ascomorpha saltans,1.894800667,25,0.11472
+SSB,2021,1/13/2021,Chaoborus,Chaoborus americanus,0.075792027,1,8.298
+SSB,2021,1/13/2021,Keratella,Keratella taurocephala,1.288464454,17,0.166705882
+SSB,2021,1/13/2021,Ascomorpha,Ascomorpha ecaudis,0.68212824,9,0.162555556
+SSB,2021,1/13/2021,Unknown Bdelloid,Unknown Bdelloid,0.22737608,3,0.182
+SSB,2021,1/13/2021,Keratella,Keratella cochlearis,0.757920267,10,0.1297
+SSB,2021,1/13/2021,Kellicottia,Kellicottia sp.,0.075792027,1,0.113
+SSB,2021,2/2/2021,Ascomorpha,Ascomorpha sp.,43.42883129,573,0.165033333
+SSB,2021,2/2/2021,Unknown rotifer 8,Unknown rotifer,26.1482492,345,0.1455
+SSB,2021,2/2/2021,Keratella,Keratella cochlearis,0.606336213,8,0.128625
+SSB,2021,2/17/2021,Asplanchna,Asplanchna sp.,4.016977414,53,0.144166667
+SSB,2021,2/17/2021,Ascomorpha,Ascomorpha ecaudis,15.08261331,199,0.155166667
+SSB,2021,2/17/2021,Ascomorpha,Ascomorpha saltans,1.894800667,25,0.13972
+SSB,2021,2/17/2021,Trichocerca,Trichocerca sp.,0.075792027,1,0.163
+SSB,2021,2/17/2021,Synchaeta,Synchaeta sp.,0.45475216,6,0.212833333
+SSB,2021,2/17/2021,Unknown rotifer 9,Unknown rotifer,0.151584053,2,0.204
+SSB,2021,3/2/2021,Asplanchna,Asplanchna priodonta,16.37107776,216,0.127933333
+SSB,2021,3/2/2021,Asplanchna,Asplanchna brightwelli,3.486433227,46,0.1582
+SSB,2021,3/2/2021,Ascomorpha,Ascomorpha saltans,2.2737608,30,0.1151
+SSB,2021,3/2/2021,Unknown rotifer 10,Unknown rotifer,4.471729574,59,0.115466667
+SSB,2021,3/2/2021,Synchaeta,Synchaeta sp.,0.151584053,2,0.1615
+SSB,2021,3/2/2021,Branchionus,Branchionus calyciflores,0.075792027,1,0.126
+SSB,2021,3/2/2021,Keratella,Keratella cochlearis,0.075792027,1,0.125
+SSB,2021,3/15/2021,Branchionus,Branchionus calyciflores,8.640291041,114,0.145433333
+SSB,2021,3/15/2021,Ascomorpha,Ascomorpha sp.,1.894800667,25,0.12444
+SSB,2021,3/15/2021,Asplanchna,Asplanchna sp.,0.530544187,7,0.177428571
+SSB,2021,3/15/2021,Bosmina,Bosmina longirostris,0.22737608,3,0.408666667
+SSB,2021,3/15/2021,Unknown rotifer 10,Unknown rotifer,1.440048507,19,0.115842105
+SSB,2021,3/15/2021,Unknown rotifer 11,Unknown rotifer,0.151584053,2,0.1625
+SSB,2021,4/13/2021,Daphnia,Daphnia rosea,0.151584053,1,0.737333333
+SSB,2021,4/13/2021,Keratella,Keratella tecta,49.41640139,326,0.129633333
+SSB,2021,4/13/2021,Keratella,Keratella cochlearis,0.303168107,2,0.1255
+SSB,2021,4/13/2021,Diacyclops,Diacyclops thomasi,0.606336213,4,1.515
+SSB,2021,4/13/2021,Unknown Bdelloid,Unknown Bdelloid,0.45475216,3,0.128666667
+SSB,2021,4/13/2021,Chaoborus,Chaoborus americanus,0.303168107,2,8.093
+SSB,2021,4/13/2021,Nauplii,Nauplii,15.15840534,100,0.228733333
+SSB,2021,4/13/2021,Unknown copepod,Unknown Cyclopoid,0.606336213,4,0.447
+SSB,2021,4/13/2021,Unknown rotifer 12,Unknown rotifer,3.031681067,20,0.0878
+SSB,2021,4/13/2021,Unknown rotifer 13,Unknown rotifer,0.757920267,5,0.152
