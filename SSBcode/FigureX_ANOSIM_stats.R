@@ -92,8 +92,8 @@ zoop.matrix2 = as.matrix(zoop.pivoted2)
 ano2 = anosim(zoop.matrix2, group.df2$year, distance = "bray", permutations = 9999)
 ano2
 
-#~~~~~~~~~~~~~~~
-#anosim between reference year and second manipulation year(?) --> NOT SIGNIFICANT (p = 0.0733)
+#~~~~~~~~~~~~~~
+#anosim between first manipulation and second manipulation year(?) --> NOT SIGNIFICANT (p = 0.0733)
 
 #Only dates under ice and combining and combining duplicate "Unknown rotifer" counts (from 2020-01-31 and 2021-03-15) to make matrix
 zoops.winter3 <- zoops.raw %>%
