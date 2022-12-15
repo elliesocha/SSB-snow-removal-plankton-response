@@ -31,7 +31,7 @@ hobo.light = read_csv('SSBdata//SSB_HoboClean.csv') |>
   filter(hour >= 10 & hour <=14) |> 
   group_by(sample_date, Sensor, Depth_m) |> 
   summarise(Light_lumm2 = mean(Light_lumft2, na.rm = T) / 0.092903, Temp_C = mean(Temp_C)) |> 
-  filter(sample_date %in% ssb.light$sample_date) |> 
+  filter(sample_date %in% ssb.PAR$sample_date) |> 
   mutate(Depth_m = round(Depth_m/25, 2) * 25) #round to nearest 0.25
 
 ssb.par.hobo = ssb.PAR |>
