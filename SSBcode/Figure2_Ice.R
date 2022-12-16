@@ -14,17 +14,17 @@ p.ice = ggplot() +
   geom_hline(aes(yintercept = 0), size = 0.3) +
   geom_bar(data = icesnow, aes(x = factor(sample_date), y = thickness, fill = icetype), 
            stat = 'identity', width=0.5, color = 'black', size = 0.2) + 
-  scale_y_reverse(labels = abs) +
+  scale_y_reverse(labels = abs, limits = c(70,-36)) +
   scale_fill_manual(values = c('#404040','#E0E0E0','lightblue3'), name = '') +
   guides(fill = guide_legend(reverse=TRUE)) +
   labs(y = "Thickness (cm)") +
-  annotate(geom = 'rect',xmin = 0.4, xmax = 3.5, ymin = -19, ymax = -Inf, fill = 'lightblue1', alpha = 1) +
-  annotate(geom = 'rect', xmin = 3.5, xmax = Inf, ymin = -19, ymax = -Inf, fill = 'lightblue2', alpha = 1) +
+  # annotate(geom = 'rect',xmin = 0.4, xmax = 3.5, ymin = -19, ymax = -Inf, fill = 'lightblue1', alpha = 1) +
+  annotate(geom = 'rect', xmin = -Inf, xmax = Inf, ymin = -25, ymax = -Inf, fill = 'lightblue2', alpha = 1, color = 'black', size = 0.3) +
   geom_vline(aes(xintercept = 3.5), linetype = 2) +
   geom_vline(aes(xintercept = 7.5), linetype = 2) +
-  annotate("text", x = 2, y = -23, label = "Reference Year", size = 9/.pt, hjust = 0.5) +
-  annotate("text", x = 5.5, y = -23, label = "Manipulation Year 1", size = 9/.pt) +
-  annotate("text", x = 10, y = -23, label = "Manipulation Year 2", size = 9/.pt) +
+  annotate("text", x = 2, y = -33, label = "Reference Year\n— SNOW —", size = 8/.pt, hjust = 0.5, lineheight = .8) +
+  annotate("text", x = 5.5, y = -33, label = "Manipulation Year 1\n— WHITE ICE —", size = 8/.pt, hjust = 0.5, lineheight = .8) +
+  annotate("text", x = 10, y = -33, label = "Manipulation Year 2\n— BLACK ICE —", size = 8/.pt, hjust = 0.5, lineheight = .8) +
   theme_bw(base_size = 9) +
   theme(axis.text.x=element_text(angle = 45, vjust = 1, hjust = 1),
         # panel.grid.minor = element_line(size = rel(0.2)),
@@ -113,10 +113,10 @@ p.chl = ggplot(chla.mean) +
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Combo plot
 p.ice / p.PAR/ p.secchi / p.chl + 
-  plot_layout(heights = c(1.8,1.5,1,1.8)) +
+  plot_layout(heights = c(2,1.5,1,1.8)) +
   plot_annotation(tag_levels = 'a', tag_suffix = ')') & 
   theme(plot.tag = element_text(size  = 8))
 
 ggsave(filename ="SSBfigures/Figure2_Ice.png", plot = last_plot(), 
-       height = 6.6, width = 6.5, units = "in", dpi = 500)
+       height = 7, width = 6.5, units = "in", dpi = 500)
 
