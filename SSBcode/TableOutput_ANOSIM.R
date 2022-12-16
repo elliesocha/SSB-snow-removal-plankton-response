@@ -3,14 +3,20 @@ library(dplyr)
 library(lubridate)
 library(vegan)
 
+set.seed(12)
+
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 source('SSBcode/00_LoadData.R')
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~ PHYTOPLANKTON ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #ANOSIM for different parameters and groupings
-anosim.pp <- function(parameter, usegroup, name1, name2) {
+anosim.pp <- function(parameter, usegroup, by = 'year', name1, name2) {
   SSB2 <- pp %>% 
+    group_by(sampledate) |> 
+    mutate(totalCells = sum(nu_per_ml)) |> 
+    ungroup() |> 
+    mutate(relNu = nu_per_ml/totalCells) |> 
     select(any_of(c('sampledate', usegroup, parameter))) %>%
     group_by(sampledate,  .data[[usegroup]]) %>%
     summarize_at(vars(parameter), funs(tot = sum)) %>% 
@@ -22,26 +28,31 @@ anosim.pp <- function(parameter, usegroup, name1, name2) {
   #dataframe with grouping info (sample year and date) to be used in ANOSIM analysis
   SSB3.group = SSB2 |> 
     select(sampledate) |> 
-    mutate(year = year(sampledate))
+    mutate(year = year(sampledate)) |> 
+    mutate(light = case_when(year <= 2020 ~ 'low',
+                             year == 2021 ~ 'high'))
   
   #ANOSIM
   p.dist2 <- vegdist(SSB3)
-  p.ano2 <- with(SSB3.group, anosim(p.dist2, year))
+  p.ano2 <- with(SSB3.group, anosim(p.dist2, get(by)))
   # print(summary(p.ano2))
   print(paste0(name1, ', ', name2, ', p = ',p.ano2$signif, ', r2 = ', round(p.ano2$statistic,2)))
   # return(SSB2)
 }
 
-pp1 = anosim.pp(parameter = 'biovolume_conc', usegroup = 'division', name1 = 'Phytoplankton Biovolume', name2 = 'Division')
-pp2 = anosim.pp(parameter = 'biovolume_conc', usegroup = 'grouping', name1 = 'Phytoplankton Biovolume', name2 = 'Morpho-Functional Groupings')
+pp1 = anosim.pp(parameter = 'biovolume_conc', usegroup = 'division', by = 'year',
+                name1 = 'Phytoplankton Biovolume', name2 = 'Division')
+pp2 = anosim.pp(parameter = 'biovolume_conc', usegroup = 'grouping', by = 'year',
+                name1 = 'Phytoplankton Biovolume', name2 = 'Morpho-Functional Groupings')
 
-pp3 = anosim.pp(parameter = 'relAbd', usegroup = 'division', name1 = 'Phytoplankton Relative Biovolume', name2 = 'Division')
-pp4 = anosim.pp(parameter = 'relAbd', usegroup = 'grouping', name1 = 'Phytoplankton Relative Biovolume', name2 = 'Morpho-Functional Groupings')
-
+pp3 = anosim.pp(parameter = 'relAbd', usegroup = 'division', by = 'year',
+                name1 = 'Phytoplankton Relative Biovolume', name2 = 'Division')
+pp4 = anosim.pp(parameter = 'relAbd', usegroup = 'grouping', by = 'year',
+                name1 = 'Phytoplankton Relative Biovolume', name2 = 'Morpho-Functional Groupings')
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~ ZOOPLANKTON ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #ANOSIM for different parameters and groupings
-anosim.zoops <- function(parameter, usegroup, name1, name2) {
+anosim.zoops <- function(parameter, usegroup, by = 'year', name1, name2) {
   SSB2 <- zoops %>% 
     select(any_of(c('sample_date', usegroup, parameter))) %>%
     group_by(sample_date,  .data[[usegroup]]) %>%
@@ -54,11 +65,14 @@ anosim.zoops <- function(parameter, usegroup, name1, name2) {
   #dataframe with grouping info (sample year and date) to be used in ANOSIM analysis
   SSB3.group = SSB2 |> 
     select(sample_date) |> 
-    mutate(year = year(sample_date))
+    mutate(year = year(sample_date)) |> 
+    mutate(light = case_when(year <= 2020 ~ 'low',
+                             year == 2021 ~ 'high'))
   
   #ANOSIM
-  p.dist2 <- vegdist(SSB3)
-  p.ano2 <- with(SSB3.group, anosim(p.dist2, year))
+  p.dist2 <- vegdist(SSB3, method = 'bray')
+  p.ano2 <- with(SSB3.group, anosim(p.dist2, get(by)))
+  
   # print(summary(p.ano2))
   print(paste0(name1, ', ', name2,
     ', p = ',p.ano2$signif, ', r2 = ', round(p.ano2$statistic,2)))
