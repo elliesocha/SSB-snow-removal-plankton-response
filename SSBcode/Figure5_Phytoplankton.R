@@ -47,8 +47,8 @@ p.pp.tot <- ggplot(pp, aes(x=factor(sampledate), y=biovolume_conc, fill=division
 
 #### Phytoplankton groupings ####
 my.colors.6 <- c("#ECD698", "#4E4019",
-                 "#26B7AE", "#0D5C57",
-                 "#7FDF8F")
+                 "#26B7AE", "#097971",
+                 "#95DAA0")
 
 p.pg.tot = ggplot(pp, aes(x=factor(sampledate), y=biovolume_conc, fill=grouping)) +
   geom_bar(position = "stack" , stat = "identity", width = 0.5) +
