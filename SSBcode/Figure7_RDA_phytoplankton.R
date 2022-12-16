@@ -149,9 +149,9 @@ RDA2_varex <- round(summary(rda_phyto.group)$cont$importance[2,2]*100,2) #Get pe
 scaling_factor <- 2
 
 # Colors 
-my.colors <- c("#94C971", "#1D3E68",
-               "#BF4904", "#FFA17F",
-               "#B5D6E2")
+my.colors <- c("#ECD698", "#4E4019",
+               "#26B7AE", "#097971",
+               "#95DAA0")
 # rda PLOT
 rda.plot2 = ggplot(df_species, aes(x=RDA1, y=RDA2)) + 
   geom_hline(yintercept=0, linetype="dashed", size = 0.3) +

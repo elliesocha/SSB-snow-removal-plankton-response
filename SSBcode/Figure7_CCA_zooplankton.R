@@ -162,9 +162,9 @@ CCA2_varex <- round(summary(cca_zoop.group)$cont$importance[2,2]*100,2) #Get per
 scaling_factor <- 2
 
 # Colors 
-my.colors <- c("#94C971", "#226231",
-               "#FFA17F",
-               "#B5D6E2", "#1D3E68")
+my.colors <- c("#A23B27", "#FFEF7D",
+               "#C2C9EF",
+               "#F69431", "#DF4E97")
 # CCA PLOT
 
 cca.plot4 = ggplot(df_species, aes(x=CCA1, y=CCA2)) + 
