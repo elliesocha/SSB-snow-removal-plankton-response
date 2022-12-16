@@ -27,9 +27,9 @@ p.light.compare = ggplot(ssb.light.filter) +
 # Load temperature/light data
 light_all = read_csv('SSBdata//SSB_HoboClean.csv') |> 
   mutate(Light_lumm2 = Light_lumft2 / 0.092903) |> 
-  mutate(group = case_when(dateTime >= as.Date('2018-11-09') & dateTime <= as.Date('2019-04-13') ~ '2019: Reference Yr',
-                          dateTime >= as.Date('2019-11-06') & dateTime <= as.Date('2020-04-24') ~ '2020: Manipulation Yr1',
-                          dateTime >= as.Date('2020-11-16') & dateTime <= as.Date('2021-04-05') ~ '2021: Manipulation Yr2')) |> 
+  mutate(group = case_when(dateTime >= as.Date('2018-11-09') & dateTime <= as.Date('2019-04-13') ~ '2019: Snow',
+                          dateTime >= as.Date('2019-11-06') & dateTime <= as.Date('2020-04-24') ~ '2020: White Ice',
+                          dateTime >= as.Date('2020-11-16') & dateTime <= as.Date('2021-04-05') ~ '2021: Black Ice')) |> 
   filter(!is.na(group)) |> 
   mutate(date = as.Date(dateTime)) |> 
   mutate(PAR.est = summary(modelPARFit)$coefficients[2,1] * log10(Light_lumm2) + summary(modelPARFit)$coefficients[1,1]) |> 
@@ -45,9 +45,9 @@ ltw.day = light_all |>
 # Load oxygen data
 ssb.do.raw = read_csv('SSBdata/SSB_DObuoy.csv') |> 
   mutate(date = as.Date(DateTime_CST)) |> 
-  mutate(group = case_when(date >= as.Date('2018-11-09') & date <= as.Date('2019-04-13') ~ '2019: Reference Yr',
-                           date >= as.Date('2019-11-06') & date <= as.Date('2020-04-24') ~ '2020: Manipulation Yr1',
-                           date >= as.Date('2020-11-16') & date <= as.Date('2021-04-05') ~ '2021: Manipulation Yr2')) 
+  mutate(group = case_when(date >= as.Date('2018-11-09') & date <= as.Date('2019-04-13') ~ '2019: Snow',
+                           date >= as.Date('2019-11-06') & date <= as.Date('2020-04-24') ~ '2020: White Ice',
+                           date >= as.Date('2020-11-16') & date <= as.Date('2021-04-05') ~ '2021: Black Ice')) 
 
 ssb.do.day = ssb.do.raw |> 
   filter(!is.na(group), !is.na(DO_mgL)) |> 
@@ -61,20 +61,20 @@ s = 1
 p.light = ggplot(ltw.day) +
   geom_hline(aes(yintercept = 7.6), linetype = 2, linewidth = 0.2) +
   geom_hline(aes(yintercept = 20), linetype = 2, linewidth = 0.2) +
-  geom_col(data = ltw.day |> filter(group == "2021: Manipulation Yr2", Sensor == s), aes(x = useDate, y = PAR.est_max, fill = '2021: Manipulation Yr2')) +
-  geom_path(data = ltw.day |> filter(group == "2021: Manipulation Yr2", Sensor == s), aes(x = useDate, y = PAR.est_mean, col = '2021: Manipulation Yr2')) +
-  geom_col(data = ltw.day |> filter(group == "2020: Manipulation Yr1", Sensor == s), aes(x = useDate, y = PAR.est_max, fill = '2020: Manipulation Yr1')) +
-  geom_path(data = ltw.day |> filter(group == "2020: Manipulation Yr1", Sensor == s), aes(x = useDate, y = PAR.est_mean, col = '2020: Manipulation Yr1')) +
-  geom_col(data = ltw.day |> filter(group == "2019: Reference Yr", Sensor == s), aes(x = useDate, y = PAR.est_max, fill = '2019: Reference Yr')) +
+  geom_col(data = ltw.day |> filter(group == "2021: Black Ice", Sensor == s), aes(x = useDate, y = PAR.est_max, fill = '2021: Black Ice')) +
+  geom_path(data = ltw.day |> filter(group == "2021: Black Ice", Sensor == s), aes(x = useDate, y = PAR.est_mean, col = '2021: Black Ice')) +
+  geom_col(data = ltw.day |> filter(group == "2020: White Ice", Sensor == s), aes(x = useDate, y = PAR.est_max, fill = '2020: White Ice')) +
+  geom_path(data = ltw.day |> filter(group == "2020: White Ice", Sensor == s), aes(x = useDate, y = PAR.est_mean, col = '2020: White Ice')) +
+  geom_col(data = ltw.day |> filter(group == "2019: Snow", Sensor == s), aes(x = useDate, y = PAR.est_max, fill = '2019: Snow')) +
   # ylab("Light Intensity"~(lum~m^-2)) +
   ylab("PAR"~(µmol~m^-2~s^-1)) +
-  scale_fill_manual(values = c("2019: Reference Yr" = "black",
-                               "2020: Manipulation Yr1" = "#f5562a",
-                               "2021: Manipulation Yr2" = "#f5d02a"),
+  scale_fill_manual(values = c("2019: Snow" = "black",
+                               "2020: White Ice" = "#f5562a",
+                               "2021: Black Ice" = "#f5d02a"),
                     name = "Max. Daily PAR") +
-  scale_color_manual(values = c("2019: Reference Yr" = "black",
-                               "2020: Manipulation Yr1" = "#b33c1b",
-                               "2021: Manipulation Yr2" = "#c4a61f"),
+  scale_color_manual(values = c("2019: Snow" = "black",
+                               "2020: White Ice" = "#b33c1b",
+                               "2021: Black Ice" = "#c4a61f"),
                     name = "Mean Daily PAR") +
   scale_x_date(labels = date_format("%b")) +
   theme_bw(base_size = 9) +
@@ -88,16 +88,16 @@ p.light = ggplot(ltw.day) +
   
 ##### Dissolved oxygen Plots ######
 p.do = ggplot(ssb.do.day) +
-  geom_line(data = ssb.do.day |> filter(group == "2021: Manipulation Yr2"), 
-              aes(x = useDate, y = DO_sat_mean, col = '2021: Manipulation Yr2'), alpha = 0.9) +
-  geom_line(data = ssb.do.day |> filter(group == "2020: Manipulation Yr1"), 
-              aes(x = useDate, y = DO_sat_mean, col = '2020: Manipulation Yr1'), alpha = 0.9) +
-  geom_line(data = ssb.do.day |> filter(group == "2019: Reference Yr"), 
-              aes(x = useDate, y = DO_sat_mean, col = '2019: Reference Yr'), alpha = 0.9) +
+  geom_line(data = ssb.do.day |> filter(group == "2021: Black Ice"), 
+              aes(x = useDate, y = DO_sat_mean, col = '2021: Black Ice'), alpha = 0.9) +
+  geom_line(data = ssb.do.day |> filter(group == "2020: White Ice"), 
+              aes(x = useDate, y = DO_sat_mean, col = '2020: White Ice'), alpha = 0.9) +
+  geom_line(data = ssb.do.day |> filter(group == "2019: Snow"), 
+              aes(x = useDate, y = DO_sat_mean, col = '2019: Snow'), alpha = 0.9) +
   ylab("Dissolved Oxygen (%)") +
-  scale_color_manual(values = c("2019: Reference Yr" = "black",
-                               "2020: Manipulation Yr1" = "#f5562a",
-                               "2021: Manipulation Yr2" = "#f5d02a"),
+  scale_color_manual(values = c("2019: Snow" = "black",
+                               "2020: White Ice" = "#f5562a",
+                               "2021: Black Ice" = "#f5d02a"),
                     name = "") +
   scale_x_date(labels = date_format("%b")) +
   theme_bw(base_size = 9) +
