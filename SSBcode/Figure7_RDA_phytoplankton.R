@@ -87,8 +87,8 @@ rda.plot1 = ggplot(df_species, aes(x=RDA1, y=RDA2)) +
                color = "lightblue4", #set color
                arrow = arrow(length=unit(0.02,"npc"))) + #Set the size of the lines that form the tip of the arrow
   #Add species text
-  geom_point(data = df_species, aes(x=RDA1, y = RDA2, col = label), size = 3) +
-  scale_color_manual(values = my.colors, name = 'Division') +
+  geom_point(data = df_species, aes(x=RDA1, y = RDA2, fill = label), size = 3, shape = 21, alpha = 0.8, stroke = 0.2) +
+  scale_fill_manual(values = my.colors, name = 'Division') +
   #Add environmental vars text
   geom_label_repel(data = df_environ, 
                    aes(x = RDA1*scaling_factor, y = RDA2*scaling_factor),
@@ -103,7 +103,7 @@ rda.plot1 = ggplot(df_species, aes(x=RDA1, y=RDA2)) +
   #Set bw theme
   theme_bw(base_size = 9) +
   theme(legend.text = element_text(size = 7), 
-        plot.title = element_text(size = 8, color = 'gold', face = 2, margin=margin(0,0,1,0)),
+        plot.title = element_text(size = 8, color = '#bfac17', face = 2, margin=margin(0,0,1,0)),
         plot.margin = unit(c(0,0,0,0), "cm"),
         legend.margin = margin(c(0,0,0,0), unit = "cm"),
         legend.key.width = unit(0.1,"cm"),
@@ -138,7 +138,10 @@ RsquareAdj(rda_phyto.group)
 
 #Get rda scores
 df_species  <- data.frame(summary(rda_phyto.group)$species[,1:2]) |> 
-  mutate(label = rownames(summary(rda_phyto.group)$species))# get the species CC1 and CC2 scores
+  mutate(label = rownames(summary(rda_phyto.group)$species)) |> # get the species CC1 and CC2 scores
+  mutate(label = factor(label, levels = c('small\nmixotrophs','large\nmixotrophs', 
+                                              'unicellular\ncyanobacteria', 'colonial\ncyanobacteria', 
+                                              'chlorophytes\n/other' )))  
 # get the species CC1 and CC2 scores
 df_environ  <- data.frame(scores(rda_phyto.group, display = 'bp')) #get the environment vars CC1 and CC2 scores
 rownames(df_environ) = gsub(pattern = '`',replacement = '', rownames(df_environ))
@@ -165,8 +168,8 @@ rda.plot2 = ggplot(df_species, aes(x=RDA1, y=RDA2)) +
                color = "lightblue4", #set color
                arrow = arrow(length=unit(0.02,"npc"))) + #Set the size of the lines that form the tip of the arrow
   #Add species text
-  geom_point(data = df_species, aes(x=RDA1, y = RDA2, col = label), size = 3) +
-  scale_color_manual(values = my.colors, name = 'Group') + 
+  geom_point(data = df_species, aes(x=RDA1, y = RDA2, fill = label), size = 3, shape = 21, alpha = 0.8, stroke = 0.2) +
+  scale_fill_manual(values = my.colors, name = 'Group') + 
   #Add environmental vars text
   geom_label_repel(data = df_environ, 
                    aes(x = RDA1*scaling_factor, y = RDA2*scaling_factor),
@@ -182,7 +185,7 @@ rda.plot2 = ggplot(df_species, aes(x=RDA1, y=RDA2)) +
   #Set bw theme
   theme_bw(base_size = 9) +
   theme(legend.text = element_text(size = 7), 
-        plot.title = element_text(size = 8, color = 'gold', face = 2, margin=margin(0,0,1,0)),
+        plot.title = element_text(size = 8, color = '#bfac17', face = 2, margin=margin(0,0,1,0)),
         plot.margin = unit(c(0,0,0,0), "cm"),
         legend.margin = margin(c(0,0,0,0), unit = "cm"),
         legend.key.width = unit(0.1,"cm"),

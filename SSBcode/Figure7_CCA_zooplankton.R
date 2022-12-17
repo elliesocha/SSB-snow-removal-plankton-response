@@ -99,8 +99,8 @@ cca.plot3 = ggplot(df_species, aes(x=CCA1, y=CCA2)) +
                color = "lightblue4", #set color
                arrow = arrow(length=unit(0.02,"npc"))) + #Set the size of the lines that form the tip of the arrow
   #Add species text
-  geom_point(data = df_species, aes(x=CCA1, y = CCA2, col = label), size = 3) +
-  scale_color_manual(values = my.colors, name = 'Genus',
+  geom_point(data = df_species, aes(x=CCA1, y = CCA2, fill = label), size = 3, shape = 21, alpha = 0.8, stroke = 0.2) +
+  scale_fill_manual(values = my.colors, name = 'Genus',
                      labels = c("*Ascomorpha*","*Asplanchna*","*Bosmina*","*Branchionus*",
                                "*Keratella*",
                                 "*Synchaeta*","Unknown rotifer")) + 
@@ -119,7 +119,7 @@ cca.plot3 = ggplot(df_species, aes(x=CCA1, y=CCA2)) +
   #Set bw theme
   theme_bw(base_size = 9) +
   theme(legend.text = element_text(size = 7), 
-        plot.title = element_text(size = 8, color = 'gold', face = 2, margin=margin(0,0,1,0)),
+        plot.title = element_text(size = 8, color = '#bfac17', face = 2, margin=margin(0,0,1,0)),
         plot.margin = unit(c(0,0,0,0), "cm"),
         legend.margin = margin(c(0,0,0,0), unit = "cm"),
         legend.key.width = unit(0.1,"cm"),
@@ -180,14 +180,14 @@ cca.plot4 = ggplot(df_species, aes(x=CCA1, y=CCA2)) +
                color = "lightblue4", #set color
                arrow = arrow(length=unit(0.02,"npc"))) + #Set the size of the lines that form the tip of the arrow
   #Add species text
-  geom_point(data = df_species, aes(x=CCA1, y = CCA2, col = label), size = 3) +
+  geom_point(data = df_species, aes(x=CCA1, y = CCA2, fill = label), size = 3, shape = 21, alpha = 0.8, stroke = 0.2) +
   # geom_text_repel(data = df_species, aes(x=CCA1, y = CCA2, col = label, label = label), #Scores in CCA1 and CCA2 to add species text
   #                 size = 2.5,
   #                 nudge_x = 0.1, nudge_y = -0.05, 
   #                 # direction = "y", 
   #                 hjust = 0,
   #                 segment.size = 0.2) +
-  scale_color_manual(values = my.colors, name = 'Trophi Group') + 
+  scale_fill_manual(values = my.colors, name = 'Trophi Group') + 
   #Add environmental vars text
   geom_label_repel(data = df_environ, 
                    aes(x = CCA1*scaling_factor, y = CCA2*scaling_factor),
@@ -203,7 +203,7 @@ cca.plot4 = ggplot(df_species, aes(x=CCA1, y=CCA2)) +
   #Set bw theme
   theme_bw(base_size = 9) +
   theme(legend.text = element_text(size = 7), 
-        plot.title = element_text(size = 8, color = 'gold', face = 2, margin=margin(0,0,1,0)),
+        plot.title = element_text(size = 8, color = '#bfac17', face = 2, margin=margin(0,0,1,0)),
         plot.margin = unit(c(0,0,0,0), "cm"),
         legend.margin = margin(c(0,0,0,0), unit = "cm"),
         legend.key.width = unit(0.1,"cm"),
