@@ -4,6 +4,7 @@ library(tidyverse)
 library(lubridate)
 library(ggrepel)
 library(patchwork)
+library(ggtext)
 
 set.seed(12)
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

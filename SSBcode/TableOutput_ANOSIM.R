@@ -36,7 +36,7 @@ anosim.pp <- function(parameter, usegroup, by = 'year', name1, name2) {
   p.dist2 <- vegdist(SSB3)
   p.ano2 <- with(SSB3.group, anosim(p.dist2, get(by)))
   # print(summary(p.ano2))
-  print(paste0(name1, ', ', name2, ', p = ',p.ano2$signif, ', r2 = ', round(p.ano2$statistic,2)))
+  print(paste0(name1, ', ', name2, ', p = ',p.ano2$signif, ', R = ', round(p.ano2$statistic,2)))
   # return(SSB2)
 }
 
@@ -75,7 +75,7 @@ anosim.zoops <- function(parameter, usegroup, by = 'year', name1, name2) {
   
   # print(summary(p.ano2))
   print(paste0(name1, ', ', name2,
-    ', p = ',p.ano2$signif, ', r2 = ', round(p.ano2$statistic,2)))
+    ', p = ',p.ano2$signif, ', R = ', round(p.ano2$statistic,2)))
   # return(SSB2)
 }
 
