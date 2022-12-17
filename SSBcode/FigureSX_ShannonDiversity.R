@@ -5,6 +5,7 @@ library(vegan)
 source('SSBcode/00_LoadData.R')
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+# Phytoplankton Shannon diversity matrix
 pp.diversity <- pp %>% 
   arrange(sampledate) |> 
   select(sampledate, taxa_name, cells_per_ml) |> 
@@ -16,6 +17,7 @@ pp.diversity <- pp %>%
 
 pp.d = data.frame(sampledate = sort(unique(pp$sampledate)), shannonDiversity = diversity(pp.diversity, index = 'shannon'))
 
+# Zooplankton Shannon diversity matrix
 zoops.diversity = zoops %>% 
   select(sample_date, species_name, individuals_measured) |> 
   group_by(sample_date, species_name) |> 
