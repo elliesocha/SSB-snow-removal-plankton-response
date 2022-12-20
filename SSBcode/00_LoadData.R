@@ -4,7 +4,7 @@ library(zoo)
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Load HOBO and PAR data
-source('SSBcode/SSB_light.R')
+source('SSBcode/00_SSB_light.R')
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Load data for ice, snow, secchi, and chlorophyll
