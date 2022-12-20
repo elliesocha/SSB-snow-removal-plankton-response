@@ -69,7 +69,7 @@ p1 / p2 + plot_layout(widths = c(0.6,0.4)) +
   plot_annotation(tag_levels = 'a', tag_suffix = ')') & 
   theme(plot.tag = element_text(size  = 8))
 
-ggsave('SSBfigures/FigureSX_TBzoopDO.png', width = 6.5, height = 4, dpi = 500)  
+ggsave('SSBfigures/FigureS2_TBzoopDO.png', width = 6.5, height = 4, dpi = 500)  
 
 
 
