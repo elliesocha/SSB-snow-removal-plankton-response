@@ -188,8 +188,9 @@ cca.plot4 = ggplot(df_species, aes(x=CCA1, y=CCA2)) +
   #                 hjust = 0,
   #                 segment.size = 0.2) +
   # scale_fill_manual(values = my.colors, name = 'Trophi Group') + 
-  scale_fill_manual(name= "Trophi Groupings", values = my.colors, labels = c("inducate trophi (raptorial)", "malleate trophi (microphagous)", "N/A", "virgate trophi 1 (raptorial)", "virgate trophi 2 (raptorial)")) +
-  
+  scale_fill_manual(name= "Trophi Groupings", values = my.colors, labels = c("inducate trophi\n(raptorial)", 
+                   "malleate trophi\n(microphagous)", "N/A", "virgate trophi 1\n(raptorial)", "virgate trophi 2\n(raptorial)")) +
+
   #Add environmental vars text
   geom_label_repel(data = df_environ, 
                    aes(x = CCA1*scaling_factor, y = CCA2*scaling_factor),
@@ -209,7 +210,7 @@ cca.plot4 = ggplot(df_species, aes(x=CCA1, y=CCA2)) +
         plot.margin = unit(c(0,0,0,0), "cm"),
         legend.margin = margin(c(0,0,0,0), unit = "cm"),
         legend.key.width = unit(0.1,"cm"),
-        legend.key.height = unit(0.15,"cm")); cca.plot4
+        legend.key.height = unit(0.7,"cm")); cca.plot4
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # # combine plots ####
 # cca.plot3 + cca.plot4 + plot_layout(widths = c(0.5,0.5)) +

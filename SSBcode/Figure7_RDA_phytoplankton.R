@@ -175,7 +175,7 @@ rda.plot2 = ggplot(df_species, aes(x=RDA1, y=RDA2)) +
                    aes(x = RDA1*scaling_factor, y = RDA2*scaling_factor),
                    label = rownames(df_environ),
                    label.padding = 0.1,
-                   nudge_x = 0.2, nudge_y = 0.2,
+                   nudge_x = 0.2, nudge_y = -0.2,
                    color="lightblue4", fill = alpha("white", 0.9),
                    segment.size = 0.2, size = 2.2) +
   #Set x and y axis titles
