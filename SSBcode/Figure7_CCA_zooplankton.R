@@ -187,13 +187,15 @@ cca.plot4 = ggplot(df_species, aes(x=CCA1, y=CCA2)) +
   #                 # direction = "y", 
   #                 hjust = 0,
   #                 segment.size = 0.2) +
-  scale_fill_manual(values = my.colors, name = 'Trophi Group') + 
+  # scale_fill_manual(values = my.colors, name = 'Trophi Group') + 
+  scale_fill_manual(name= "Trophi Groupings", values = my.colors, labels = c("inducate trophi (raptorial)", "malleate trophi (microphagous)", "N/A", "virgate trophi 1 (raptorial)", "virgate trophi 2 (raptorial)")) +
+  
   #Add environmental vars text
   geom_label_repel(data = df_environ, 
                    aes(x = CCA1*scaling_factor, y = CCA2*scaling_factor),
                    label = rownames(df_environ),
                    label.padding = 0.1,
-                   nudge_y = -0.3, color="lightblue4", fill = alpha("white", 0.9),
+                   nudge_y = -0.5, color="lightblue4", fill = alpha("white", 0.9),
                    min.segment.length = 0.2,
                    segment.size = 0.2, size = 2.2) +
   #Set x and y axis titles
@@ -225,4 +227,4 @@ source('SSBcode/Figure7_RDA_phytoplankton.R')
   theme(plot.tag = element_text(size  = 8))
 
 ggsave('SSBfigures/Figure7_CCA2.png', width = 6.5, height = 4, dpi = 500)  
-#####
+ #####
