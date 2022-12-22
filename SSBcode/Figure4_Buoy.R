@@ -4,6 +4,13 @@ library(lubridate)
 library(patchwork)
 library(scales)
 
+# Load modified corr function, for better visualization
+source('SSBcode/Functions//network_plot2.R')
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+source('SSBcode/00_LoadData.R')
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 # Ice on and off dates
 # Ice off/on 2018-11-09 2019-04-13
 # Ice off/on 2019-11-06 2020-04-24
@@ -14,8 +21,11 @@ ssb.light.filter = ssb.par.hobo |>
   filter(Depth_m < 2) |> 
   filter(sample_date != as.Date('2021-02-17'))
 
+# r2 value for text
+summary(lm(log10(light) ~ log10(Light_lumm2), data = ssb.light.filter)) 
+
 p.light.compare = ggplot(ssb.light.filter) + 
-  geom_smooth(aes(x = Light_lumm2, y = light), method = 'lm', color = 'lightblue4', size = 0.5, alpha = 0.3) +
+  geom_smooth(aes(x = Light_lumm2, y = light), method = 'lm', color = 'lightblue4', linewidth = 0.5, alpha = 0.3) +
   geom_point(aes(x = Light_lumm2, y = light, group = Depth_m), shape = 21, stroke = 0.2, fill = 'lightblue4') +
   scale_x_log10() +
   scale_y_log10() +
