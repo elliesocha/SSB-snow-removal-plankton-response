@@ -53,3 +53,14 @@ hobo.light.PAR = read_csv('SSBdata//SSB_HoboClean.csv') |>
   mutate(PAR.est = summary(modelPARFit)$coefficients[2,1] * log10(Light_lumm2) + summary(modelPARFit)$coefficients[1,1]) |> 
   mutate(PAR.est = 10^PAR.est)
   
+# PAR stats 
+hobo.light.PAR |> 
+  group_by(date = as.Date(dateTime)) |> 
+  summarise(PAR = max(PAR.est), light = mean(Light_lumm2)) |> 
+  mutate(month = month(date)) |> 
+  filter(month %in% c(1:3)) |> 
+  mutate(month = if_else(month == 1, 2, month)) |>
+  group_by(year(date), month) |> 
+  summarise(mean(PAR), mean(light)) |> 
+  arrange(month)
+
